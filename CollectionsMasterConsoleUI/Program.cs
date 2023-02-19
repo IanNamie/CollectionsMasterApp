@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Runtime.ExceptionServices;
 
 namespace CollectionsMasterConsoleUI
 {
@@ -12,43 +16,38 @@ namespace CollectionsMasterConsoleUI
             //Utlilize the method stubs at the bottom for the methods you must create ⬇⬇⬇
 
             #region Arrays
-            //TODO: Create an integer Array of size 50
             
+            var numbers = new int[50];
 
-            //TODO: Create a method to populate the number array with 50 random numbers that are between 0 and 50
+           
+            Populater(numbers);
+
             
-
-            //TODO: Print the first number of the array
-
-            //TODO: Print the last number of the array            
-
+            Console.WriteLine($"{numbers[0]}");
+                       
+            Console.WriteLine($"{numbers[49]}");
             Console.WriteLine("All Numbers Original");
-            //UNCOMMENT this method to print out your numbers from arrays or lists
-            //NumberPrinter();
+            
+            NumberPrinter(numbers);
             Console.WriteLine("-------------------");
-
-            //TODO: Reverse the contents of the array and then print the array out to the console.
-            //Try for 2 different ways
-            /*  1) First way, using a custom method => Hint: Array._____(); 
-                2) Second way, Create a custom method (scroll to bottom of page to find ⬇⬇⬇)
-            */
-
+            
             Console.WriteLine("All Numbers Reversed:");
+            //Array.Reverse(numbers);
 
             Console.WriteLine("---------REVERSE CUSTOM------------");
 
+            ReverseArray(numbers);
+
             Console.WriteLine("-------------------");
 
-            //TODO: Create a method that will set numbers that are a multiple of 3 to zero then print to the console all numbers
             Console.WriteLine("Multiple of three = 0: ");
-            
+            ThreeKiller(numbers);
 
             Console.WriteLine("-------------------");
 
-            //TODO: Sort the array in order now
-            /*      Hint: Array.____()      */
             Console.WriteLine("Sorted numbers:");
-            
+            Array.Sort(numbers);
+            NumberPrinter(numbers);
 
             Console.WriteLine("\n************End Arrays*************** \n");
             #endregion
@@ -103,8 +102,18 @@ namespace CollectionsMasterConsoleUI
         }
 
         private static void ThreeKiller(int[] numbers)
-        {
-            
+        {//TODO: Create a method that will set numbers that are a multiple 
+         //of 3 to zero then print to the console all numbers
+            for (int x = 0; x < numbers.Length; x++)
+            {
+                if (numbers[x] % 3 == 0)
+                {
+                    Console.WriteLine($"{numbers[x] = 0}");
+                }else Console.WriteLine($"{numbers[x]}");
+                
+            }
+
+
         }
 
         private static void OddKiller(List<int> numberList)
@@ -125,13 +134,21 @@ namespace CollectionsMasterConsoleUI
 
         private static void Populater(int[] numbers)
         {
-            Random rng = new Random();
+            for( int i = 0; i < numbers.Length; i++  )
+            { 
+                
+                Random rng = new Random();
+                numbers[i] = rng.Next(0, numbers.Length);
+            }
 
         }        
 
         private static void ReverseArray(int[] array)
         {
             
+          Array.Reverse(array);
+          
+          NumberPrinter(array);
         }
 
         /// <summary>
